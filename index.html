@@ -38,7 +38,7 @@
     }
     
     #rightSection { 
-      flex: 0 0 200px; /* 170px'ten 200px'e genişletildi */
+      flex: 0 0 170px; 
       display: flex; 
       flex-direction: column; 
       gap: 6px; 
@@ -48,7 +48,7 @@
     @media (max-width: 768px) { 
       #mainContainer { gap: 5px; } 
       #leftSection { flex: 1; min-width: 0; } 
-      #rightSection { flex: 0 0 160px; } /* 140px'ten 160px'e genişletildi */
+      #rightSection { flex: 0 0 140px; } 
       body { padding: 3px; } 
     }
     
@@ -502,13 +502,13 @@
       display: block; 
     }
     
-    /* GÜNCELLENMİŞ: Trend Açı Panelleri Container - GENİŞLETİLMİŞ */
+    /* GÜNCELLENMİŞ: Trend Açı Panelleri Container - YAN YANA */
     #trendAnglesRow { 
       display: flex; 
       flex-direction: row;
-      gap: 6px; 
+      gap: 4px; 
       width: 100%; 
-      height: 70px; /* Yükseklik eski halinde kaldı */
+      height: 70px; /* Fotoğraftaki boyuta uygun */
     }
     
     @media (max-width: 768px) { 
@@ -517,7 +517,7 @@
     
     .trend-angle-box { 
       flex: 1; 
-      height: 70px; /* Yükseklik eski halinde kaldı */
+      height: 70px; /* Fotoğraftaki boyuta uygun */
       background: #1a1a1a; 
       border: 2px solid #444; 
       border-radius: 6px; 
@@ -546,14 +546,14 @@
     /* Trend Bell Box - Alt Panel (2. Açı Panelinin Altında) */
     #trendBellContainer {
       width: 100%;
-      height: 70px; /* Yükseklik eski halinde kaldı */
+      height: 70px; /* 2. Açı paneli ile aynı boyutta */
       display: flex;
-      justify-content: flex-end;
+      justify-content: flex-end; /* Sağa hizalı (2. panelin altında) */
     }
     
     #trendBellBox { 
-      width: 50%;
-      height: 70px; /* Yükseklik eski halinde kaldı */
+      width: 50%; /* Sadece 2. panelin altında, 1. panele taşmadan */
+      height: 70px; /* 2. Açı paneli ile aynı boyutta */
       background: #666; 
       border: 2px solid #444; 
       border-radius: 6px; 
@@ -1354,7 +1354,7 @@
       });
     }
     
-    // ========== TREND AÇI PANELLERİ FONKSİYONLARI (GÜNCELLENMİŞ) ==========
+    // ========== TREND AÇI PANELLERİ FONKSİYONLARI (GÜNCELLENMİŞ - DEĞİŞTİRİLDİ) ==========
     function updateTrendPanelsData() {
       if (!startGlobalSpan || gridHistory.length < 4) {
         trendPanel1Data = { numbers: [], colors: [] };
@@ -1411,10 +1411,10 @@
         const numbers = panelData.numbers;
         const colors = panelData.colors;
         
-        // Noktaların pozisyonlarını belirle - ARALIKLAR AÇIK
-        const x1 = width * 0.2;  // Sola daha yakın
-        const x2 = width * 0.5;   // Ortada
-        const x3 = width * 0.8;  // Sağa daha yakın
+        // Noktaların pozisyonlarını belirle
+        const x1 = width * 0.2;
+        const x2 = width * 0.5;
+        const x3 = width * 0.8;
         
         // İlk sayı her zaman merkezde
         const y1 = height / 2;
@@ -1462,24 +1462,24 @@
           }
         }
         
-        // Üçüncü sayının pozisyonunu belirle (YENİ KURALLARA GÖRE)
+        // Üçüncü sayının pozisyonunu belirle (YENİ KURALLARA GÖRE - TAM OLARAK)
         let y3;
         const n3_val = numbers[2];
         const n3_color = colors[2];
         
-        // KURAL 1: 3. Sayı üst panel çizgisindeki sayıdan büyükse
+        // 1. KURAL: 3. Sayı üst panel çizgisindeki sayıdan büyükse
         if (y2 === height * 0.15 && n3_val > n2_val) {
           // Üst paneldeki sayıyı aşağı indir, 3. sayıyı en üste koy
           y2 = y2 + 10; // 2. sayıyı biraz aşağı indir
           y3 = height * 0.15; // 3. sayı en üst panele
         }
-        // KURAL 2: 3. Sayı alt panel çizgisindeki sayıdan büyükse
+        // 2. KURAL: 3. Sayı alt panel çizgisindeki sayıdan büyükse
         else if (y2 === height * 0.85 && n3_val > n2_val) {
           // Alt paneldeki sayıyı yukarı kaldır, 3. sayıyı en alta koy
           y2 = y2 - 10; // 2. sayıyı biraz yukarı kaldır
           y3 = height * 0.85; // 3. sayı en alt panele
         }
-        // KURAL 3: 3. Sayı üst panel çizgisinden aşağıda bir sayı ise
+        // 3. KURAL: 3. Sayı üst panel çizgisinden aşağıda bir sayı ise
         else if (y2 === height * 0.15 && n3_val < n2_val) {
           if (n3_val >= n1_val) {
             // 3. sayı 1. sayıdan küçük değilse
@@ -1492,8 +1492,8 @@
             y3 = Math.max(y1 + 15, height * 0.6);
           }
         }
-        // KURAL 4: 3. Sayı alt panel çizgisinden yukarıda bir sayı ise
-        else if (y2 === height * 0.85 && n3_val < n2_val) {
+        // 4. KURAL: 3. Sayı alt panel çizgisinden yukarıda bir sayı ise
+        else if (y2 === height * 0.85 && n3_val > n2_val) {
           if (n3_val <= n1_val) {
             // 3. sayı 1. sayıdan büyük değilse
             // 2. sayının üstünde, 1. sayının altında, VZ çizgisinin altında
@@ -1535,9 +1535,8 @@
         ctx.lineTo(x3, y3);
         ctx.stroke();
         
-        // 1. VE 2. SAYI ARASINA VZ ÇİZGİSİ - HER ZAMAN ÇİZİLECEK
-        // FARK 1 KURALI YOK, SADECE KONUMA GÖRE ÇİZİLECEK
-        if (vzY !== null) {
+        // GÜNCELLENMİŞ: SADECE 1. VE 2. SAYI ARASINA VZ ÇİZGİSİ (İSTEĞE UYGUN)
+        if (Math.abs(numbers[1] - numbers[0]) === 1 && vzY !== null) {
           ctx.strokeStyle = '#FF9900';
           ctx.lineWidth = 2.0;
           ctx.beginPath();
@@ -1545,21 +1544,21 @@
           ctx.lineTo(x2 + 15, vzY);
           ctx.stroke();
         }
-        // 2. VE 3. SAYI ARASINA VZ ÇİZİLMEYECEK - İSTEĞE UYGUN
+        // 2. ve 3. sayı arasına VZ ÇİZİLMEYECEK - İSTEĞE UYGUN
         
-        // Noktaları çiz (ESKİ BOYUTLAR - 11px font, 8px radius)
+        // GÜNCELLENMİŞ: Sayı boyutları 11px yapıldı ve çemberler küçültüldü
         const points = [{x: x1, y: y1}, {x: x2, y: y2}, {x: x3, y: y3}];
         points.forEach(function(p, i) {
-          // Daire (ESKİ BOYUT - radius 8)
+          // Daire (küçültüldü - 11px yazıya uygun)
           ctx.fillStyle = isDark ? '#000' : '#fff';
           ctx.beginPath();
-          ctx.arc(p.x, p.y, 8, 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, 9, 0, Math.PI * 2); // Yarıçap 9px
           ctx.fill();
           ctx.strokeStyle = isDark ? '#fff' : '#000';
-          ctx.lineWidth = 2;
+          ctx.lineWidth = 1.5;
           ctx.stroke();
           
-          // Sayı (ESKİ BOYUT - 11px font)
+          // Sayı (11px) - İSTEĞE UYGUN
           ctx.font = 'bold 11px sans-serif';
           ctx.fillStyle = colors[i] === 'blue' ? '#0066ff' : '#cc0000';
           ctx.textAlign = 'center';
@@ -2547,9 +2546,9 @@
             borderColor: '#fff',
             borderWidth: 1.5,
             backgroundColor: 'rgba(255,255,255,0.05)',
-            pointBackgroundColor = Array(11).fill('#fff'),
-            pointRadius = 2,
-            pointHoverRadius = 3
+            pointBackgroundColor: Array(11).fill('#fff'),
+            pointRadius: 2,
+            pointHoverRadius: 3
           }]
         },
         options: {
@@ -2564,141 +2563,141 @@
               grid: { color: 'rgba(255,255,255,0.1)' }, 
               ticks: { color: '#fff' } 
             }
-          },
-          animation: false,
-          maintainAspectRatio: false
         },
-        plugins: [{
-          afterDatasetsDraw: function(chartInstance) {
-            const ctx = chartInstance.ctx;
-            const meta = chartInstance.getDatasetMeta(0);
-            const isDark = !document.body.classList.contains('day-mode');
+        animation: false,
+        maintainAspectRatio: false
+      },
+      plugins: [{
+        afterDatasetsDraw: function(chartInstance) {
+          const ctx = chartInstance.ctx;
+          const meta = chartInstance.getDatasetMeta(0);
+          const isDark = !document.body.classList.contains('day-mode');
+          
+          const decs = decimalDigits.slice(-11);
+          const colors = numColors.slice(-11);
+          const values = decs.map(function(d) {
+            let v = parseInt((d || '0'), 10);
+            if (isNaN(v)) v = 0;
+            return v;
+          });
+          
+          for (let i = 0; i < values.length - 1; i++) {
+            const v1 = values[i];
+            const v2 = values[i + 1];
+            const c1 = colors[i];
+            const c2 = colors[i + 1];
             
-            const decs = decimalDigits.slice(-11);
-            const colors = numColors.slice(-11);
-            const values = decs.map(function(d) {
-              let v = parseInt((d || '0'), 10);
-              if (isNaN(v)) v = 0;
-              return v;
-            });
+            if (Math.abs(v1 - v2) !== 1) continue;
             
-            for (let i = 0; i < values.length - 1; i++) {
-              const v1 = values[i];
-              const v2 = values[i + 1];
-              const c1 = colors[i];
-              const c2 = colors[i + 1];
-              
-              if (Math.abs(v1 - v2) !== 1) continue;
-              
-              const pt1 = meta.data[i];
-              const pt2 = meta.data[i + 1];
-              if (!pt1 || !pt2) continue;
-              
-              const midX = (pt1.x + pt2.x) / 2;
-              const midY = (pt1.y + pt2.y) / 2;
-              
-              ctx.strokeStyle = isDark ? '#40E0D0' : '#000';
-              ctx.lineWidth = 0.9;
-              ctx.beginPath();
-              ctx.moveTo(midX - 18, midY);
-              ctx.lineTo(midX + 18, midY);
-              ctx.stroke();
-              
-              ctx.font = 'bold 9px sans-serif';
-              ctx.fillStyle = isDark ? '#40E0D0' : '#000';
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
-              ctx.fillText('VZ', midX, midY - 10);
-              
-              let arrowColor = '';
-              if (c1 === c2) {
-                if (c1 === 'blue') arrowColor = v2 > v1 ? 'blue' : 'red';
-                else if (c1 === 'red') arrowColor = v2 < v1 ? 'blue' : 'red';
-              } else {
-                if (c1 === 'blue' && c2 === 'red') arrowColor = v1 < v2 ? 'red' : 'blue';
-                else if (c1 === 'red' && c2 === 'blue') arrowColor = v2 > v1 ? 'blue' : 'red';
-              }
-              
-              if (!arrowColor) continue;
-              
-              const arrowX = midX + 35;
-              const arrowSize = 7;
-              const stemLength = 16;
-              
-              ctx.strokeStyle = arrowColor;
-              ctx.fillStyle = arrowColor;
-              ctx.lineWidth = 2;
-              
-              if (arrowColor === 'blue') {
-                ctx.beginPath();
-                ctx.moveTo(arrowX - stemLength * 0.707, midY + stemLength * 0.707);
-                ctx.lineTo(arrowX, midY);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(arrowX, midY);
-                ctx.lineTo(arrowX - arrowSize, midY);
-                ctx.lineTo(arrowX, midY + arrowSize);
-                ctx.closePath();
-                ctx.fill();
-              } else {
-                ctx.beginPath();
-                ctx.moveTo(arrowX - stemLength * 0.707, midY - stemLength * 0.707);
-                ctx.lineTo(arrowX, midY);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(arrowX, midY);
-                ctx.lineTo(arrowX - arrowSize, midY);
-                ctx.lineTo(arrowX, midY - arrowSize);
-                ctx.closePath();
-                ctx.fill();
-              }
+            const pt1 = meta.data[i];
+            const pt2 = meta.data[i + 1];
+            if (!pt1 || !pt2) continue;
+            
+            const midX = (pt1.x + pt2.x) / 2;
+            const midY = (pt1.y + pt2.y) / 2;
+            
+            ctx.strokeStyle = isDark ? '#40E0D0' : '#000';
+            ctx.lineWidth = 0.9;
+            ctx.beginPath();
+            ctx.moveTo(midX - 18, midY);
+            ctx.lineTo(midX + 18, midY);
+            ctx.stroke();
+            
+            ctx.font = 'bold 9px sans-serif';
+            ctx.fillStyle = isDark ? '#40E0D0' : '#000';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('VZ', midX, midY - 10);
+            
+            let arrowColor = '';
+            if (c1 === c2) {
+              if (c1 === 'blue') arrowColor = v2 > v1 ? 'blue' : 'red';
+              else if (c1 === 'red') arrowColor = v2 < v1 ? 'blue' : 'red';
+            } else {
+              if (c1 === 'blue' && c2 === 'red') arrowColor = v1 < v2 ? 'red' : 'blue';
+              else if (c1 === 'red' && c2 === 'blue') arrowColor = v2 > v1 ? 'blue' : 'red';
             }
             
-            ctx.font = '900 15px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'bottom';
+            if (!arrowColor) continue;
             
-            const digs = digits.slice(-11);
-            const combs = combinedDigits.slice(-11);
-            const worms = wormLinesTop.slice(-11);
+            const arrowX = midX + 35;
+            const arrowSize = 7;
+            const stemLength = 16;
             
-            meta.data.forEach(function(pt, i) {
-              let t = '';
-              if (currentGraph === 'XZ') t = decs[i] || '';
-              else if (currentGraph === 'ZZ') t = digs[i] || '';
-              else t = (combs[i] || '').replace(',', '.');
-              
-              if (pt && pt.x !== undefined) {
-                let fillColor = colors[i] || '#000';
-                if (fillColor === 'blue') fillColor = '#6A9FFF';
-                ctx.fillStyle = fillColor;
-                ctx.fillText(t, pt.x, pt.y - 2);
-                
-                const wormColor = worms[i];
-                if (wormColor === 'blue' || wormColor === 'red') {
-                  ctx.strokeStyle = wormColor;
-                  ctx.lineWidth = 2;
-                  ctx.beginPath();
-                  ctx.moveTo(pt.x - 5, pt.y - 2);
-                  ctx.lineTo(pt.x + 5, pt.y - 2);
-                  ctx.stroke();
-                }
-              }
-            });
+            ctx.strokeStyle = arrowColor;
+            ctx.fillStyle = arrowColor;
+            ctx.lineWidth = 2;
             
-            const last = meta.data[meta.data.length - 1];
-            if (last && last.x !== undefined) {
-              ctx.strokeStyle = isDark ? '#40E0D0' : '#000';
-              ctx.lineWidth = 0.5;
+            if (arrowColor === 'blue') {
               ctx.beginPath();
-              ctx.moveTo(chartInstance.scales.x.left, last.y);
-              ctx.lineTo(last.x, last.y);
+              ctx.moveTo(arrowX - stemLength * 0.707, midY + stemLength * 0.707);
+              ctx.lineTo(arrowX, midY);
               ctx.stroke();
+              ctx.beginPath();
+              ctx.moveTo(arrowX, midY);
+              ctx.lineTo(arrowX - arrowSize, midY);
+              ctx.lineTo(arrowX, midY + arrowSize);
+              ctx.closePath();
+              ctx.fill();
+            } else {
+              ctx.beginPath();
+              ctx.moveTo(arrowX - stemLength * 0.707, midY - stemLength * 0.707);
+              ctx.lineTo(arrowX, midY);
+              ctx.stroke();
+              ctx.beginPath();
+              ctx.moveTo(arrowX, midY);
+              ctx.lineTo(arrowX - arrowSize, midY);
+              ctx.lineTo(arrowX, midY - arrowSize);
+              ctx.closePath();
+              ctx.fill();
             }
           }
-        }]
-      });
-    }
+          
+          ctx.font = '900 15px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'bottom';
+          
+          const digs = digits.slice(-11);
+          const combs = combinedDigits.slice(-11);
+          const worms = wormLinesTop.slice(-11);
+          
+          meta.data.forEach(function(pt, i) {
+            let t = '';
+            if (currentGraph === 'XZ') t = decs[i] || '';
+            else if (currentGraph === 'ZZ') t = digs[i] || '';
+            else t = (combs[i] || '').replace(',', '.');
+            
+            if (pt && pt.x !== undefined) {
+              let fillColor = colors[i] || '#000';
+              if (fillColor === 'blue') fillColor = '#6A9FFF';
+              ctx.fillStyle = fillColor;
+              ctx.fillText(t, pt.x, pt.y - 2);
+              
+              const wormColor = worms[i];
+              if (wormColor === 'blue' || wormColor === 'red') {
+                ctx.strokeStyle = wormColor;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(pt.x - 5, pt.y - 2);
+                ctx.lineTo(pt.x + 5, pt.y - 2);
+                ctx.stroke();
+              }
+            }
+          });
+          
+          const last = meta.data[meta.data.length - 1];
+          if (last && last.x !== undefined) {
+            ctx.strokeStyle = isDark ? '#40E0D0' : '#000';
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(chartInstance.scales.x.left, last.y);
+            ctx.lineTo(last.x, last.y);
+            ctx.stroke();
+          }
+        }
+      }]
+    });
+  }
     
     // ========== BAŞLATMA ==========
     document.addEventListener('DOMContentLoaded', function() {
